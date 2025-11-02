@@ -90,7 +90,7 @@ metricsTbl.Tag = 'tblMetrics';
 setappdata(fig,'tblMetrics', metricsTbl);
 
 
-% ===== Controls (panel keeps them tidy) =====
+% ===== Controls =====
 ctrlPanel = uipanel('Parent',fig,'Title','Controls','FontWeight','bold', ...
     'Units','normalized','BackgroundColor','w','Position',[rightX 0.02 rightW 0.22]);
 
@@ -130,7 +130,7 @@ btnRun.Callback = @(~,~) runSimulationWithOptions( ...
 end
 
 
-% ---------- helper: tiny wrapper to call your runSimulation ----------
+% ---------- tiny wrapper to call runSimulation ----------
 function runSimulationWithOptions(cbFaults,cbML,cbKalman,cbAnim,cbExport,popupFaultType,...
                                   axSensors,axConsensus,ax3D,fig)
 try
