@@ -44,6 +44,25 @@ All results are automatically written to:
 ```matlab
 demos/exports/benchmark_YYYYMMDD_HHMMSS.csv
 ```
+
+Machine Learning The machine learning subsystem enables automated fault classification, It provides a complete pipeline for generating training data, extracting features, and applying supervised classification
+**`train_and_cache_model.m`** 
+  Trains a supervised classifier — a *bagged ensemble of decision trees* — using statistical features extracted from simulated strain data. 
+  The trained model is cached locally (`bestClassifier.mat`) for reuse, ensuring reproducibility and fast execution across simulation runs.
+
+- **`applyMLPerSensor.m`** 
+  Applies the trained model to each sensor's data stream, returning per-sensor fault predictions (`Normal`, `Drift`, `Delamination`, `Crack`, `Impact`) and confidence scores. 
+  This allows multi-sensor fusion of classification results and enables visualization of fault propagation across the turbine blade.
+
+- **`generateTrainingData.m`** 
+  Generates synthetic, labelled datasets representing both *healthy* and *faulty* structural conditions. 
+  Each class includes multiple noise levels and fault amplitudes to improve model robustness and generalisation.
+
+- **`extractFBGFeatures.m`** 
+  Extracts key time domain and statistical features — such as mean, variance, RMS, kurtosis, skewness, and peak-to-peak values from each sensor's strain signal. 
+  Ensures consistent feature alignment between training and runtime classification.
+Together, these scripts form a modular pipeline for **data generation → feature extraction → model training → real-time classification**, enabling the MATLAB GUI to perform automated fault detection and diagnosis using a reproducible bagged-tree ensemble model.
+
 Repository Strucutre
 src/       → MATLAB source code (GUI, simulation, ML, Kalman, visualisation)
 demos/     → Runnable scripts (run_demo.m, run_benchmark_suite.m)
